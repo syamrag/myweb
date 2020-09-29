@@ -12,9 +12,7 @@ pipeline {
             }
         }
         stage('Example Deploy') {
-            when {
-                branch 'master'
-            }
+        
             steps {
                 sh 'mvn clean package'
             }
