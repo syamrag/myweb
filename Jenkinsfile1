@@ -1,21 +1,20 @@
-pipeline{
-    agent any
-    
-    
-    stages{
-        stage("Git Checkout"){
-            steps{
-                git credentialsId: 'github', url: 'https://github.com/javahometech/myweb'
-            }
-        }
-
 pipeline {
     agent any
+
     tools {
         maven 'maven'
     }
+
     stages {
-        stage('Build') {
+        stage('Git Checkout') {
+            steps {
+                 git url: 'https://github.com/syamrag/myweb'
+            }
+        }
+        stage('Example Deploy') {
+            when {
+                branch 'master'
+            }
             steps {
                 sh 'mvn clean package'
             }
